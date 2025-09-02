@@ -743,7 +743,25 @@
             }
 
             .carousel-slides {
-                overflow: hidden;
+                /* allow horizontal scrolling (touch/drag) while keeping the radio-driven transforms
+                   as an alternative navigation method */
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                /* hide native scrollbars but preserve scrolling interaction */
+                scrollbar-width: none;
+                /* Firefox */
+                -ms-overflow-style: none;
+                /* IE 10+ */
+                padding-bottom: 6px;
+                /* avoid content being clipped under invisible scrollbar */
+            }
+
+            /* Webkit browsers */
+            .carousel-slides::-webkit-scrollbar {
+                height: 0;
+                display: none;
             }
 
             .carousel-inner {
@@ -756,6 +774,8 @@
             .carousel-slide {
                 flex: 0 0 23%;
                 min-width: 220px;
+                /* enable snap alignment so manual scroll lands on card boundaries */
+                scroll-snap-align: start;
             }
 
             @media (max-width: 768px) {
@@ -769,7 +789,7 @@
                 }
             }
 
-            /* translate by quarters */
+
             #c1:checked~.carousel-wrap .carousel-inner {
                 transform: translateX(0%);
             }
@@ -903,8 +923,10 @@
 
 
                 <div class="nav-label c4 mt-8 items-center gap-4">
-                    <label for="c1" class="text-white  rounded-full p-3 cursor-pointer bg-[#28282C] ">‹</label>
-                    <label for="c4" class="text-white rounded-full p-3 cursor-pointer bg-[#28282C] ">›</label>
+                    <label for="c1"
+                        class="inline-flex items-center justify-center w-10 h-10 text-white rounded-full bg-[#28282C] cursor-pointer text-lg transition hover:bg-[#3a3a3a]">‹</label>
+                    <label for="c4"
+                        class="inline-flex items-center justify-center w-10 h-10 text-white rounded-full bg-[#28282C] cursor-pointer text-lg transition hover:bg-[#3a3a3a]">›</label>
                 </div>
             </div>
 
