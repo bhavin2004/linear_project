@@ -14,6 +14,43 @@
             cursor: pointer;
         }
     </style>
+    <script>
+        // Simple, easy-to-read function to swap the center image
+        // and highlight the active button.
+        function setImage(n) {
+            // map button number to image path
+            const map = {
+                1: './assets/collaborate.png',
+                2: './assets/inline.png',
+                3: './assets/commands.png'
+            };
+
+            const img = document.getElementById('change-the-image');
+            if (!img) return; // nothing to do if image is missing
+
+            // set image (default to 1 if unknown)
+            img.src = map[n] || map[1];
+
+            // update button styles: active button white + green dot
+            for (let i = 1; i <= 3; i++) {
+                const btn = document.getElementById('btn-' + i);
+                if (!btn) continue;
+                const dot = btn.querySelector('span');
+                if (i === n) {
+                    btn.style.color = 'white';
+                    if (dot) dot.style.backgroundColor = '#16a34a';
+                } else {
+                    btn.style.color = '#696C73';
+                    if (dot) dot.style.backgroundColor = '#232326';
+                }
+            }
+        }
+
+        // initialize default state
+        document.addEventListener('DOMContentLoaded', function () {
+            setImage(1);
+        });
+    </script>
 </head>
 
 <body class="min-h-screen font-sans min-w-screen bg-[#08090A] text-white">
@@ -88,7 +125,7 @@
                                     <b class="text-white mr-2 text-light">New Cursor Backgroud Agent:</b> Assign Issues
                                     to Cursor in Linear
                                 </button>
-                                <button class="text-[#506eb6] px-3 py-1 rounded hover:bg-[#3A3A3D] right-0
+                                <button class="text-[#506eb6] flex justify-center items-center rounded hover:bg-[#3A3A3D] pr-10
                                 ">Changelog</button>
                             </div>
                         </div>
@@ -202,19 +239,18 @@
             <span class="text-[#696C73]">Streamline issues, projects, and product roadmaps.</span>
         </article>
 
-        <aside class="flex mt-5 lg:max-w-[950px] lg:mx-auto">
+        <div class="flex mt-5 lg:max-w-[950px] lg:mx-auto">
             <div
-                class="rounded-[10px] cursor-pointer px-2 sm:px-5 sm:py-2 bg-[#E6E6E6] hover:bg-white text-black duration-150 transition">
+                class="rounded-[10px] cursor-pointer px-2 sm:px-5 sm:py-2 bg-[#E6E6E6] hover:bg-[#f5f2f2] text-black duration-150 transition ">
                 Start building
             </div>
-            <div
-                class="flex hover:bg-white ml-7 rounded-xl cursor-pointer hover:bg-clip-content hover:opacity-30 items-center justify-self-center ">
+            <div class="flex hover:bg-[#28282C] ml-7 rounded-xl cursor-pointer items-center justify-center">
                 <div
                     class="flex px-1 sm:px-4 rounded-[10px] transition duration-200 bg-gradient-to-r from-white to-[#363030] text-transparent bg-clip-text justify-center items-center">
                     Introducing Linear for Agents >
                 </div>
             </div>
-        </aside>
+        </div>
 
         <div class="relative w-full h-auto">
             <div class="bg-[#08090A] absolute inset-0"></div>
@@ -421,7 +457,7 @@
                 </div>
             </div>
             <div>
-                <img id="changable-image" src="./assets/collaboarate.png" alt="">
+                <img id="change-the-image" src="./assets/collaboarate.png" alt="">
             </div>
         </div>
         <div class="grid feture grid-cols-4 border-t-2 py-10 border-[#696C73]   ">
@@ -864,19 +900,19 @@
 
             <!-- visible controls (labels) - placed below slides and shown per radio state -->
             <div class="mt-4 flex items-center justify-center">
-            
 
-                    <div class="nav-label c4 mt-8 items-center gap-4">
-                        <label for="c1" class="text-white  rounded-full p-3 cursor-pointer bg-[#28282C] ">‹</label>
-                        <label for="c4" class="text-white rounded-full p-3 cursor-pointer bg-[#28282C] ">›</label>
-                    </div>
+
+                <div class="nav-label c4 mt-8 items-center gap-4">
+                    <label for="c1" class="text-white  rounded-full p-3 cursor-pointer bg-[#28282C] ">‹</label>
+                    <label for="c4" class="text-white rounded-full p-3 cursor-pointer bg-[#28282C] ">›</label>
                 </div>
-
-
             </div>
+
+
+        </div>
     </section>
 
-    
+
     <section class="p-3 lg:mx-auto mt-20 shadow-[inset_0_200px_60px_rgba(255,255,255,0.03)] mr-40 ">
         <div class="grid lg:grid-cols-2 ">
             <div class="flex p-5 flex-col lg:pl-[300px]">
